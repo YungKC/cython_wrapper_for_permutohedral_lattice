@@ -1,7 +1,7 @@
 import time
 import numpy as np
 import skimage.io as imgio
-from permutohedral_lattice import pyPermutohedralLattice
+from permutohedral_lattice import p
 
 def main():
     im = imgio.imread('input.jpg')
@@ -25,7 +25,7 @@ def main():
     positions = np.expand_dims(positions,axis=0)
     positions = positions.astype(np.float32)
     start_time = time.time()
-    out = pyPermutohedralLattice.filter(im, positions)
+    out = p.filter(im, positions)
     print("duration time:%f" % (time.time() - start_time))
     out = np.asarray(out,dtype=np.float32)
     out -= out.min()

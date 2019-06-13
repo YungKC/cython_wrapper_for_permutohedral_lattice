@@ -4,7 +4,7 @@ from cpermutohedrallattice cimport PermutohedralLattice
 from cmodified_permutohedral cimport ModifiedPermutohedral
 from myimage cimport pyImage
 
-cdef class pyPermutohedralLattice:
+cdef class p:
     @staticmethod
     cdef _filter(float[:,:,:,::1] a, float[:,:,:,::1] b):
         a_pyImage = pyImage().set_data(a)
@@ -29,7 +29,7 @@ cdef class pyPermutohedralLattice:
             if np.sum(index) <= 0: continue
             new_a_ = np.reshape(new_a[index],(1,1,-1,c_a))
             new_b_ = np.reshape(new_b[index],(1,1,-1,c_b))
-            ret_tmp = pyPermutohedralLattice._filter(new_a_,new_b_)
+            ret_tmp = p._filter(new_a_,new_b_)
             ret[index] = np.reshape(ret_tmp,(-1,c_a))
         return ret
 
@@ -65,7 +65,7 @@ cdef class pyPermutohedralLattice:
                 j = i
             else:
                 j = 0
-            ret_tmp = pyPermutohedralLattice._filter_without_normalization(np.reshape(a[i,:,:,:],(1,h,w,c_a)),np.reshape(b[j,:,:,:],(1,h,w,c_b)))
+            ret_tmp = p._filter_without_normalization(np.reshape(a[i,:,:,:],(1,h,w,c_a)),np.reshape(b[j,:,:,:],(1,h,w,c_b)))
             if ret is None:
                 ret = ret_tmp
             else:
@@ -86,7 +86,7 @@ cdef class pyPermutohedralLattice:
                 j = i
             else:
                 j = 0
-            ret_tmp = pyPermutohedralLattice._filter(np.reshape(a[i,:,:,:],(1,h,w,c_a)),np.reshape(b[j,:,:,:],(1,h,w,c_b)))
+            ret_tmp = p._filter(np.reshape(a[i,:,:,:],(1,h,w,c_a)),np.reshape(b[j,:,:,:],(1,h,w,c_b)))
             if ret is None:
                 ret = ret_tmp
             else:
@@ -106,7 +106,7 @@ cdef class pyPermutohedralLattice:
                 j = i
             else:
                 j = 0
-            ret_tmp = pyPermutohedralLattice._filter_with_mask(np.reshape(a[i,:,:,:],(1,h,w,c_a)),np.reshape(b[j,:,:,:],(1,h,w,c_b)),np.reshape(mask[j],(1,h,w)),mask_num[j])
+            ret_tmp = p._filter_with_mask(np.reshape(a[i,:,:,:],(1,h,w,c_a)),np.reshape(b[j,:,:,:],(1,h,w,c_b)),np.reshape(mask[j],(1,h,w)),mask_num[j])
             if ret is None:
                 ret = ret_tmp
             else:

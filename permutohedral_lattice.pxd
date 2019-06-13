@@ -1,4 +1,4 @@
-cdef class pyPermutohedralLattice:
+cdef class p:
     @staticmethod
     cdef _filter(float[:,:,:,::1] a, float[:,:,:,::1] b)
     @staticmethod
